@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import ZeroMQLib
 
 extension ZeroMQ {
 

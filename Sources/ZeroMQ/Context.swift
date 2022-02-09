@@ -5,6 +5,7 @@
 // Please see the accompanying LICENSE file for the full text of the license.
 //
 
+import ZeroMQLib
 
 extension ZeroMQ {
 
