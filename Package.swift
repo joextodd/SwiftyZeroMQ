@@ -1,20 +1,32 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.5
 // The swift-tools-version declares the minimum version of Swift required to build this package.
+
 import PackageDescription
 
 let package = Package(
-    name: "SwiftyZeroMQ",
-    platforms: [
-        .iOS(.v9),
-        .macOS(.v10_11),
-    ],
+    name: "ZeroMQ",
     products: [
         .library(
-            name: "SwiftyZeroMQ",
-            targets: ["SwiftyZeroMQ"]),
+            name: "ZeroMQ",
+            targets: ["ZeroMQ"]),
     ],
     targets: [
+        .binaryTarget(
+            name: "LibZMQ",
+            path: "Libraries/LibZMQ.xcframework"),
         .target(
-            name: "SwiftyZeroMQ")
+            name: "ZeroMQ",
+            dependencies: ["LibZMQ"],
+            publicHeadersPath: "Headers/**",
+            cSettings: [
+                .headerSearchPath("Headers/**"),
+            ],
+            linkerSettings: [
+                .linkedLibrary("zmq"),
+                .linkedFramework("LibZMQ.xcframework")
+            ]),
+        .testTarget(
+            name: "ZeroMQTests",
+            dependencies: ["ZeroMQ"]),
     ]
 )

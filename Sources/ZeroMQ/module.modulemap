@@ -1,0 +1,8 @@
+/// Expose LibZMQ for Swift usage
+module LibZMQ {
+    header "../../Headers/zmq.h"
+    link "zmq"
+    export *
+    module * { export * }
+}
+
