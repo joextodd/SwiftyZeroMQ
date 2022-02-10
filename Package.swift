@@ -9,22 +9,16 @@ let package = Package(
         .library(
             name: "ZeroMQ",
             targets: ["ZeroMQ"]),
+        .library(name: "ZeroMQLib", targets: ["ZeroMQLib"])
     ],
     targets: [
         .binaryTarget(
             name: "LibZMQ",
             path: "Libraries/LibZMQ.xcframework"),
+        .target(name: "ZeroMQLib", dependencies: ["LibZMQ"]),
         .target(
             name: "ZeroMQ",
-            dependencies: ["LibZMQ"],
-            publicHeadersPath: "Headers/**",
-            cSettings: [
-                .headerSearchPath("Headers/**"),
-            ],
-            linkerSettings: [
-                .linkedLibrary("zmq"),
-                .linkedFramework("LibZMQ.xcframework")
-            ]),
+            dependencies: ["ZeroMQLib"]),
         .testTarget(
             name: "ZeroMQTests",
             dependencies: ["ZeroMQ"]),

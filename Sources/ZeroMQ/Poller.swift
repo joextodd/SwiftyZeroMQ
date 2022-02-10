@@ -5,6 +5,9 @@
 // Please see the accompanying LICENSE file for the full text of the license.
 //
 
+import Foundation
+import ZeroMQLib
+
 extension ZeroMQ {
 
     /**
@@ -104,7 +107,7 @@ extension ZeroMQ {
 
             defer {
               // Clean up poll items on scope exit
-              pollItems.deallocate(capacity: sockets.count)
+              pollItems.deallocate()
             }
 
             let intTimeout = (timeout == nil)

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import ZeroMQLib
 
 extension ZeroMQ {
 
@@ -170,7 +171,7 @@ extension ZeroMQ {
 
             defer {
                 // Clean up allocated buffer on scope exit
-                buffer.deallocate(capacity: bufferLength)
+                buffer.deallocate()
             }
 
             let bufferSize = zmq_recv(handle, buffer, bufferLength,
@@ -447,7 +448,7 @@ extension ZeroMQ {
          */
         private func setStringOption(_ name: Int32, _ value: String?) throws {
             let optValLen = (value != nil)
-                ? value!.characters.count
+                ? value!.count
                 : 0
             let optval = (value != nil)
                 ? UnsafeRawPointer(value!)
@@ -508,7 +509,7 @@ extension ZeroMQ {
 
             let pointer = UnsafeMutablePointer<T>.allocate(capacity: 1)
             defer {
-                pointer.deallocate(capacity: 1)
+                pointer.deallocate()
             }
 
             var sz = MemoryLayout<T>.size
