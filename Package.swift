@@ -24,7 +24,10 @@ let package = Package(
             path: "Libraries/LibZMQ.xcframework"),
         .target(
             name: "ZeroMQLib",
-            dependencies: ["LibZMQ"]),
+            dependencies: ["LibZMQ"],
+            linkerSettings: [
+                .linkedLibrary("stdc++")
+            ]),
         .target(
             name: "ZeroMQ",
             dependencies: ["ZeroMQLib"]),

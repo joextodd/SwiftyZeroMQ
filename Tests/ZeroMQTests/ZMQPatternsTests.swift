@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import ZeroMQLib
 @testable import ZeroMQ
 
 class ZMQPatternsTests: XCTestCase {
