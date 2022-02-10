@@ -5,17 +5,26 @@ import PackageDescription
 
 let package = Package(
     name: "ZeroMQ",
+    platforms: [
+        .iOS(.v9),
+        .macOS(.v10_11),
+    ],
     products: [
         .library(
             name: "ZeroMQ",
             targets: ["ZeroMQ"]),
-        .library(name: "ZeroMQLib", targets: ["ZeroMQLib"])
+        .library(
+            name: "ZeroMQLib",
+            targets: ["ZeroMQLib"]
+        )
     ],
     targets: [
         .binaryTarget(
             name: "LibZMQ",
             path: "Libraries/LibZMQ.xcframework"),
-        .target(name: "ZeroMQLib", dependencies: ["LibZMQ"]),
+        .target(
+            name: "ZeroMQLib",
+            dependencies: ["LibZMQ"]),
         .target(
             name: "ZeroMQ",
             dependencies: ["ZeroMQLib"]),
